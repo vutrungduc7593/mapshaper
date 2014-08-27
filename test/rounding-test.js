@@ -40,7 +40,7 @@ describe('mapshaper-rounding.js', function () {
     })
 
     // polygon endpoint is in the spike
-    it('removes a spike 3', function () {
+    it('removes a spike 2', function () {
       var json = {
         type: "GeometryCollection",
         geometries: [{
