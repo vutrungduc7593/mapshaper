@@ -210,7 +210,7 @@ api.importFiles = function(opts) {
   } else if (opts.stdin) {
     dataset = api.importFile('/dev/stdin', opts);
   } else {
-    error('[i] Missing content');
+    error('[i] Missing content; files:', files);
   }
   return dataset;
 };
