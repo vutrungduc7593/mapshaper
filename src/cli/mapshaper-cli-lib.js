@@ -38,6 +38,7 @@ cli.expandFileName = function(name) {
       listing = require('fs').readdirSync(dir),
       rxp = utils.wildcardToRegExp(path.filename),
       matches;
+  console.log("path:", path);
   return listing.reduce(function(memo, item) {
     var path = require('path').join(dir, item);
     if (rxp.test(item) && cli.isFile(path)) {
