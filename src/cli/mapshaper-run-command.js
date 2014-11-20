@@ -184,7 +184,6 @@ MapShaper.applyCommand = function(func, targetLayers) {
   }, []);
 };
 
-
 api.exportFiles = function(dataset, opts) {
   var exports = MapShaper.exportFileContent(dataset, opts);
   if (exports.length > 0 === false) {

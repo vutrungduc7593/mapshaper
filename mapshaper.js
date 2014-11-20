@@ -13097,7 +13097,6 @@ MapShaper.applyCommand = function(func, targetLayers) {
   }, []);
 };
 
-
 api.exportFiles = function(dataset, opts) {
   var exports = MapShaper.exportFileContent(dataset, opts);
   if (exports.length > 0 === false) {
@@ -13534,7 +13533,7 @@ function validateInputOpts(cmd) {
   if (_[0] == '-' || _[0] == '/dev/stdin') {
     o.stdin = true;
   } else if (_.length > 0) {
-    o.files = _.map(cli.validateInputFile);
+    o.files = cli.validateInputFiles(_);
   }
 
   if ("precision" in o && o.precision > 0 === false) {
@@ -14523,6 +14522,33 @@ cli.validateFileExtension = function(path) {
 cli.replaceFileExtension = function(path, ext) {
   var info = utils.parseLocalPath(path);
   return info.pathbase + '.' + ext;
+};
+
+cli.expandFileName = function(name) {
+  if (name.indexOf('*') == -1) return [name];
+  var path = utils.parseLocalPath(name),
+      dir = path.directory || '.',
+      listing = require('fs').readdirSync(dir),
+      rxp = utils.wildcardToRegExp(path.filename),
+      matches;
+  return listing.reduce(function(memo, item) {
+    var path = require('path').join(dir, item);
+    if (rxp.test(item) && cli.isFile(path)) {
+      memo.push(path);
+    }
+    return memo;
+  }, []);
+};
+
+cli.validateInputFiles = function(files) {
+  // wildcard expansion (usually already handled by shell)
+  var expanded = files.reduce(function(memo, name) {
+    return memo.concat(cli.expandFileName(name));
+  }, []);
+  return expanded.reduce(function(memo, path) {
+    cli.validateInputFile(path);
+    return memo.concat(path);
+  }, []);
 };
 
 cli.validateInputFile = function(ifile) {

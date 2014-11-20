@@ -38,29 +38,9 @@ Browser compatibility: mapshaper works in recent versions of Chrome and Firefox 
 
 ### Command line tool
 
-The [Command Reference](https://github.com/mbloch/mapshaper/wiki/Command-Reference) has detailed usage information.
+The mapshaper wiki has an [introduction](https://github.com/mbloch/mapshaper/wiki/Introduction-to-the-Command-Line-Tool) to using the command line tool, which includes many simple examples.
 
-Examples
-
-```bash
-# Simplify counties.shp retaining 10% of removable vertices.
-mapshaper counties.shp -simplify 10% -o output/counties_simple.shp
-
-# Convert all the Shapefiles in a directory into GeoJSON.
-mapshaper *.shp -o format=geojson output/
-
-# Generate state-level polygons by dissolving a layer of counties
-mapshaper counties.shp -dissolve STATE copy-fields=STATE_NAME -o states.shp
-
-# Extract the border between two states.
-mapshaper states.shp -filter "STATE=='OR' || STATE=='WA'" -innerlines
-
-# Generate two new fields using a JavaScript expression.
-mapshaper counties.shp -each "STATE_FIPS=CNTY_FIPS.substr(0, 5), AREA=$.area"
-
-# Join a csv table to a Shapefile (the :str suffix prevents FIPS field from being converted to numbers)
-mapshaper -i states.shp -join demographics.txt keys=STATE_FIPS,FIPS:str
-```
+For a detailed reference, see the [Command Reference](https://github.com/mbloch/mapshaper/wiki/Command-Reference).
 
 ### Building and testing
 
