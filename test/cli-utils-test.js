@@ -11,7 +11,7 @@ describe('mapshaper-cli-lib.js', function () {
 
     it('expands wild cards', function() {
       assert.deepEqual(cli.expandInputFiles(['test/test_data/centroids/*.shp']),
-        ['test/test_data/centroids/a.shp', 'test/test_data/centroids/b.shp']);
+        ['test\\test_data\\centroids\\a.shp', 'test\\test_data\\centroids\\b.shp']);
     })
 
     it('API error if wild card expansion fails', function() {

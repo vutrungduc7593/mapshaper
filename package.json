@@ -1,6 +1,6 @@
 {
-	"name": "mapshaper",
-	"version": "0.4.126",
+	"name": "es6-mapshaper",
+	"version": "0.4.128",
 	"description": "A tool for editing vector datasets for mapping and GIS.",
 	"keywords": [
 		"shapefile",
@@ -23,9 +23,8 @@
 	},
 	"scripts": {
 		"test": "node node_modules/mocha/bin/mocha --check-leaks -R dot",
-		"pretest": "./build",
-		"prepublishOnly": "npm test",
-		"postpublish": "./release"
+		"pretest": "node ./build",
+		"prepublishOnly": "npm test"
 	},
 	"main": "./mapshaper.js",
 	"dependencies": {
